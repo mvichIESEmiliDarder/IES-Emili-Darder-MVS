@@ -31,11 +31,21 @@ Iptables té per defecte 5 taules: filter, nat, mangle, raw i security. Noltros 
 És la taula que s’encarrega de filtrar paquets. És la que més emprarem ja que és la que ens permet fer el filtratge del que volem que entri o surti del PC, sempre i quan aquest no faci funcions de router.
 
 Primerament veurem les regles aplicades a cada cadena de la taula filter:
-```
+```bash
 sudo iptables -t filter -L
 ```
 
- ![[Pasted image 20241213230552.png]]
+Donant com a resultat:
+```
+Chain INPUT (policy ACCEPT)
+target     prot opt source               destination         
+
+Chain FORWARD (policy DROP)
+target     prot opt source               destination         
+
+Chain OUTPUT (policy ACCEPT)
+target     prot opt source               destination         
+```
 
 Com hem dit abans, aquesta taula s'utilitza per al filtratge de paquets. Es podria dir que aquesta taula és la que dóna la connotació de firewall a iptables i si no s’especifica, es pren per defecte.
 
@@ -197,7 +207,20 @@ Per veure les cadenes de la taula nat feim: 
 sudo iptables -t nat -L
 ```
 
- ![[Pasted image 20241213233051.png]]
+Donant com a resultat:
+```
+Chain PREROUTING (policy ACCEPT)
+target     prot opt source               destination         
+
+Chain INPUT (policy ACCEPT)
+target     prot opt source               destination         
+
+Chain OUTPUT (policy ACCEPT)
+target     prot opt source               destination         
+
+Chain POSTROUTING (policy ACCEPT)
+target     prot opt source               destination         
+```
 
 
 **Exemple 1:**
