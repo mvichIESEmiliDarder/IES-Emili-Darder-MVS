@@ -1,0 +1,20 @@
+services:
+  duplicati:
+    image: lscr.io/linuxserver/duplicati:latest
+    container_name: duplicati
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Madrid
+      - SETTINGS_ENCRYPTION_KEY=clauSecreta
+      - CLI_ARGS= #optional
+      - DUPLICATI__WEBSERVICE_PASSWORD= #optional
+    volumes:
+      - /home/marti/docker/duplicati/config:/config
+      - /mnt/backup:/backup
+      - /home/marti:/source
+      - /home/marti/docker/duplicati/scripts:/scripts
+      - /var/run/docker.sock:/var/run/docker.sock # Mapea el socket de Docker
+    ports:
+      - 8200:8200
+    restart: unless-stopped
